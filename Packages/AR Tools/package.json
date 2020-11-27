@@ -14,6 +14,7 @@
   "type": "tool",
   "dependencies": {
     "com.unity.xr.arfoundation": "4.1.1",
-    "com.thatcosmonaut.stately": "1.0.0"
+    "com.thatcosmonaut.stately": "1.0.0",
+    "com.edwon.unitytools": "1.0.1"
   }
 }

@@ -6,15 +6,23 @@
       "source": "embedded",
       "dependencies": {
         "com.unity.xr.arfoundation": "4.1.1",
-        "com.thatcosmonaut.stately": "1.0.0"
+        "com.thatcosmonaut.stately": "1.0.0",
+        "com.edwon.unitytools": "1.0.1"
       }
     },
-    "com.thatcosmonaut.stately": {
-      "version": "https://gitlab.com/Edwon/stately.git#upm",
+    "com.edwon.unitytools": {
+      "version": "https://github.com/edwonia/Unity-Tools.git?path=/Packages/Unity Tools",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "31c5476c4e70ccd49d282b61f6a3b07b81ff22ea"
+      "hash": "0d622f94e557a24794788fff29e269eef3215ef3"
+    },
+    "com.thatcosmonaut.stately": {
+      "version": "https://gitlab.com/Edwon/stately.git?path=/UnityPackage/Packages/Stately",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "19e4a00629fad134d8a24ecabfd713605db9b861"
     },
     "com.unity.editorcoroutines": {
       "version": "1.0.0",
