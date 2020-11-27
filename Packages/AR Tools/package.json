@@ -11,5 +11,9 @@
     "email": "edwon@edwon.tv",
     "url": "https://www.edwon.tv"
   },
-  "type": "tool"
+  "type": "tool",
+  "dependencies": {
+    "com.unity.xr.arfoundation": "4.1.1",
+    "com.thatcosmonaut.stately": "1.0.0"
+  }
 }

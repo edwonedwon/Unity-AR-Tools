@@ -2,37 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-#if UNITY_IOS
-using UnityEngine.iOS;
-#endif
+using UnityEngine.XR.ARFoundation;
 
 public class ARMeshSupportedEvents : MonoBehaviour
 {
-    public bool debugLogInvoke;
-    public bool debugLogDeviceInfo;
+    public bool debugLog;
     public UnityEvent meshSupportedDeviceAwake;
     public UnityEvent meshUnsupportedDeviceAwake;
+    ARMeshManager arMeshManager;
+    bool arSessionReady;
 
     void Awake()
     {
-        #if UNITY_IOS
-        string generation = Device.generation.ToString();
+        arSessionReady = false;
 
-        if (debugLogDeviceInfo)
-            Debug.Log("deviceGeneration: " + generation);
+        arMeshManager = FindObjectOfType<ARMeshManager>();
 
-        if(generation.ContainsAll("iPadPro", "2Gen") || generation.ContainsAll("iPad","Unknown"))
-        {
-            if (debugLogInvoke)
-                Debug.Log("invoking mesh Supported DeviceAwake()");
-            meshSupportedDeviceAwake.Invoke();
-        }
+        if (arMeshManager != null)
+            StartCoroutine(Init());
         else
+            Debug.Log("ARMeshManager is null on ARMeshSupportedEvents");
+    }
+
+    IEnumerator Init()
+    {
+        while(!arSessionReady)
         {
-            meshUnsupportedDeviceAwake.Invoke();
-            if (debugLogInvoke)
-                Debug.Log("invoking mesh Unsupported DeviceAwake()");
+            if (ARSession.state == ARSessionState.Ready)
+            {
+                arSessionReady = true;
+                if (arMeshManager.subsystem != null)
+                {
+                    if (debugLog)
+                        Debug.Log("invoking mesh Supported DeviceAwake()");
+                    meshSupportedDeviceAwake.Invoke();
+                }
+                else
+                {
+                    if (debugLog)
+                        Debug.Log("invoking mesh Unsupported DeviceAwake()");
+                    meshUnsupportedDeviceAwake.Invoke();
+                }
+            }
+            yield return null;
         }
-        #endif
     }
 }
