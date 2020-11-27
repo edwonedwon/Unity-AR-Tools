@@ -1,0 +1,15 @@
+{
+  "name": "com.edwon.artools",
+  "version": "1.0.0",
+  "displayName": "AR Tools",
+  "description": "tools and utilities for making AR app development easier",
+  "unity": "2019.2",
+  "unityRelease": "0f1",
+  "keywords": [],
+  "author": {
+    "name": "Edwon",
+    "email": "edwon@edwon.tv",
+    "url": "https://www.edwon.tv"
+  },
+  "type": "tool"
+}
