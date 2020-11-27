@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 namespace Edwon.UnityTools 
 {
@@ -74,9 +73,10 @@ namespace Edwon.UnityTools
 
         public void SpawnAndHoldDuplicateAfter(float delay)
         {
-            Sequence s = DOTween.Sequence();
-            s.SetDelay(delay);
-            s.AppendCallback(()=> SpawnAndHoldDuplicate());
+            Debug.Log("reimplement this");
+            // Sequence s = DOTween.Sequence();
+            // s.SetDelay(delay);
+            // s.AppendCallback(()=> SpawnAndHoldDuplicate());
         }
 
         GameObject Spawn(GameObject toSpawn)

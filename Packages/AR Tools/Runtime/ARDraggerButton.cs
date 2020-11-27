@@ -7,7 +7,12 @@ using Stately;
 using System;
 
 [RequireComponent(typeof(Button))]
-public class ARDraggerButton : PointerEventHandler 
+public class ARDraggerButton : MonoBehaviour,
+    IPointerDownHandler,
+    IDragHandler,
+    IPointerUpHandler,
+    IScrollHandler,
+    IPointerExitHandler
 {
     public UnityEvent onPointerHold;
     public UnityEvent onVerticalDragEnter;
@@ -169,7 +174,7 @@ public class ARDraggerButton : PointerEventHandler
         }
     }
 
-    public override void OnPointerDown(PointerEventData eventData) 
+    public void OnPointerDown(PointerEventData eventData) 
     {
         #if UNITY_EDITOR
         startPos = Input.mousePosition;
@@ -181,7 +186,7 @@ public class ARDraggerButton : PointerEventHandler
         rootState.SendSignal(onPointerDownSignal);
     }
 
-    public override void OnDrag(PointerEventData eventData) 
+    public void OnDrag(PointerEventData eventData) 
     {
         #if UNITY_EDITOR
         screenPos = Input.mousePosition;
@@ -194,19 +199,19 @@ public class ARDraggerButton : PointerEventHandler
         rootState.SendSignal(onDragSignal);
     }
 
-    public override void OnPointerUp(PointerEventData eventData) 
+    public void OnPointerUp(PointerEventData eventData) 
     {
         currentEventData = eventData;
         rootState.SendSignal(onPointerUpSignal);
     }
 
-    public override void OnPointerExit(PointerEventData eventData)
+    public void OnPointerExit(PointerEventData eventData)
     {
         currentEventData = eventData;
         rootState.SendSignal(onPointerExitSignal);
     }
 
-    public override void OnScroll(PointerEventData eventData) 
+    public void OnScroll(PointerEventData eventData) 
     {
         if (scrollRect != null)
             scrollRect.OnScroll(eventData);
