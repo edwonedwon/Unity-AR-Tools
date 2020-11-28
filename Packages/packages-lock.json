@@ -1,28 +1,29 @@
 {
   "dependencies": {
     "com.edwon.artools": {
-      "version": "file:AR Tools",
+      "version": "file:com.edwon.artools",
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.unity.xr.arfoundation": "4.1.1",
-        "com.thatcosmonaut.stately": "1.0.0",
-        "com.edwon.unitytools": "1.0.1"
+        "com.thatcosmonaut.stately": "1.0.3",
+        "com.edwon.unitytools": "1.0.1",
+        "com.unity.xr.arkit": "4.1.1",
+        "com.unity.xr.arfoundation": "4.1.1"
       }
     },
     "com.edwon.unitytools": {
-      "version": "https://github.com/edwonia/Unity-Tools.git?path=/Packages/Unity Tools",
+      "version": "https://github.com/edwonia/Unity-Tools.git?path=/Packages/Unity Tools#1.0.1",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "0d622f94e557a24794788fff29e269eef3215ef3"
+      "hash": "4104c6fcd2ff2274f52f2a632b331fd4842b832e"
     },
     "com.thatcosmonaut.stately": {
-      "version": "https://gitlab.com/Edwon/stately.git?path=/UnityPackage/Packages/Stately",
+      "version": "https://gitlab.com/Edwon/stately.git?path=/UnityPackage/Packages/Stately#1.0.3",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "19e4a00629fad134d8a24ecabfd713605db9b861"
+      "hash": "5dac5ca39d6b350b2651e7e4663e9c7c2931ae00"
     },
     "com.unity.editorcoroutines": {
       "version": "1.0.0",

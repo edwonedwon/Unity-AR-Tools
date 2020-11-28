@@ -15,7 +15,7 @@ public class ARCoachingEvents : MonoBehaviour
     public UnityEvent onARCoachingEnd;
 
     ARSession arSession;
-    [ReadOnly]
+    // [ReadOnly]
     [SerializeField]
     bool arCoachingActive;
     bool arCoachingActiveLast;

@@ -103,7 +103,7 @@ public class ARDraggerButton : MonoBehaviour,
 
         pointerDown.OnEnter = delegate
         {
-            base.OnPointerDown(currentEventData);
+            OnPointerDown(currentEventData);
         };
 
         pointerHold.OnEnter = delegate
@@ -115,7 +115,7 @@ public class ARDraggerButton : MonoBehaviour,
         {
             draggingState.OnUpdate = delegate
             {
-                base.OnDrag(currentEventData);
+                OnDrag(currentEventData);
             };
             draggingState.init.ChangeTo(draggingState.draggingVerticaly).If
             (
@@ -169,7 +169,7 @@ public class ARDraggerButton : MonoBehaviour,
 
             pointerUp.OnEnter = delegate
             {
-                base.OnPointerUp(currentEventData);
+                OnPointerUp(currentEventData);
             };
         }
     }
