@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.edwon.artools": {
-      "version": "file:com.edwon.artools",
+      "version": "file:AR Tools",
       "depth": 0,
       "source": "embedded",
       "dependencies": {
