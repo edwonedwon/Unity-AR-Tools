@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.thatcosmonaut.stately": "https://gitlab.com/Edwon/stately.git?path=/UnityPackage/Packages/Stately#1.0.3",
-    "com.edwon.unitytools": "https://github.com/edwonia/Unity-Tools.git?path=/Packages/Unity Tools#1.0.1",
+    "com.edwon.unitytools": "https://github.com/edwonia/Unity-Tools.git?path=/Packages/Unity Tools#1.0.3",
     "com.unity.ide.vscode": "1.2.3",
     "com.unity.test-framework": "1.1.18",
     "com.unity.ugui": "1.0.0",
