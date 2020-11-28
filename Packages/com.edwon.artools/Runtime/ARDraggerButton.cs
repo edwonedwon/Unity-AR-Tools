@@ -23,10 +23,6 @@ public class ARDraggerButton : MonoBehaviour,
 
     public float pointerHoldTime = 1f;
 
-    bool dragging = false;
-    bool start = false;
-    bool scrolling = false;
-    bool placing = false;
     Vector2 startPos;
     Vector2 screenPos;
     Button button;
