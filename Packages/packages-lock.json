@@ -8,17 +8,17 @@
         "com.unity.xr.arkit": "4.1.1",
         "com.unity.xr.arfoundation": "4.1.1",
         "com.thatcosmonaut.stately": "1.0.3",
-        "com.edwon.unitytools": "1.0.3"
+        "com.edwon.unitytools": "1.0.8"
       }
     },
     "com.edwon.unitytools": {
-      "version": "https://github.com/edwonia/Unity-Tools.git?path=/Packages/Unity Tools#1.0.3",
+      "version": "https://github.com/edwonia/Unity-Tools.git?path=/Packages/Unity Tools#1.0.8",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.ugui": "1.0.0"
       },
-      "hash": "8db0dc42cb31a8a8788b4460249a0b3735c7b0c6"
+      "hash": "6200bc9f50911f60f4e8d9375979cf4d9749d87d"
     },
     "com.thatcosmonaut.stately": {
       "version": "https://gitlab.com/Edwon/stately.git?path=/UnityPackage/Packages/Stately#1.0.3",
