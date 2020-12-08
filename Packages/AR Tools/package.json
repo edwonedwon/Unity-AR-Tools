@@ -1,6 +1,6 @@
 {
   "name": "com.edwon.artools",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "displayName": "AR Tools",
   "description": "tools and utilities for making AR app development easier",
   "unity": "2019.2",
@@ -17,5 +17,12 @@
     "com.unity.xr.arfoundation": "4.1.1",
     "com.thatcosmonaut.stately": "1.0.3",
     "com.edwon.unitytools": "1.0.8"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Sample",
+      "description": "all the samples",
+      "path": "Samples"
+    }
+  ]
 }
