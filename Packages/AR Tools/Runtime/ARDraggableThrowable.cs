@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ARDraggableThrowable : MonoBehaviour, IARDraggableObject
+public class ARDraggableThrowable : MonoBehaviour, IARDraggable, IARDraggableSpawnable
 {
-    public Vector2 screenPos {get;set;}
+    // public Vector2 screenPos {get;set;}
     GameObject player;
     Camera playerCamera;
     Transform throwVectorTF;
@@ -22,11 +22,16 @@ public class ARDraggableThrowable : MonoBehaviour, IARDraggableObject
 
     void Awake()
     {
-        player = GameObject.FindWithTag("Player");
-        playerCamera = player.GetComponentInChildren<Camera>();
+        GetPlayerComponents();
         throwVectorTF = playerCamera.transform.Find("Throw Vector");
         if (mainRigidbody == null)
             mainRigidbody = GetComponent<Rigidbody>();
+    }
+
+    void GetPlayerComponents()
+    {
+        player = GameObject.FindWithTag("Player");
+        playerCamera = player.GetComponentInChildren<Camera>();
     }
 
     public void OnDragBegin(Vector2 screenPos)
@@ -37,13 +42,13 @@ public class ARDraggableThrowable : MonoBehaviour, IARDraggableObject
             mainRigidbody.MoveRotation(Random.rotation);
         else
             mainRigidbody.MoveRotation(playerCamera.transform.rotation);
+        
+        mainRigidbody.MovePosition(GetSpawnPosition(screenPos));
     }
 
     public void OnDragUpdate(Vector2 screenPos)
     {
-        Vector3 position = playerCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, distanceFromCamera));
-        
-        mainRigidbody.MovePosition(position);
+        mainRigidbody.MovePosition(GetSpawnPosition(screenPos));
 
         screenVelocity = screenPos - screenPosLast;
         screenVelocitySmoothed = Vector3.Lerp(
@@ -66,5 +71,13 @@ public class ARDraggableThrowable : MonoBehaviour, IARDraggableObject
         if (debugDraw)
             Debug.DrawRay(playerCamera.transform.position, throwForceVector, Color.red, 1f);
         mainRigidbody.AddForce(throwForceVector);
+    }
+
+    public Vector3 GetSpawnPosition(Vector2 screenPos)
+    {
+        if (player == null || playerCamera == null)
+            GetPlayerComponents();
+
+        return playerCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, distanceFromCamera));
     }
 }

@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IARDraggableObject
+public interface IARDraggable
 {
     void OnDragBegin(Vector2 screenPos);
     void OnDragUpdate(Vector2 screenPos);
     void OnDragEnd(Vector2 screenPos);
 }
 
-public class ARDraggableObjectBasic : MonoBehaviour, IARDraggableObject
+public interface IARDraggableSpawnable
+{
+    Vector3 GetSpawnPosition(Vector2 screenPos);
+}
+
+public class ARDraggableBasic : MonoBehaviour, IARDraggable, IARDraggableSpawnable
 {
     public Vector2 screenPos {get;set;}
     GameObject player;
@@ -49,5 +54,10 @@ public class ARDraggableObjectBasic : MonoBehaviour, IARDraggableObject
     public void OnDragEnd(Vector2 screenPos)
     {
 
+    }
+
+    public Vector3 GetSpawnPosition(Vector2 screenPos)
+    {
+        return Vector3.zero;
     }
 }

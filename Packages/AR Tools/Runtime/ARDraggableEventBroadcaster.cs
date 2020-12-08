@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ARDraggableEventBroadcaster : MonoBehaviour, IARDraggableObject
+public class ARDraggableEventBroadcaster : MonoBehaviour, IARDraggable
 {
     public delegate void OnDragBeginEvent(GameObject dragged, Vector2 screenPos);
     public delegate void OnDragUpdateEvent(GameObject dragged, Vector2 screenPos);

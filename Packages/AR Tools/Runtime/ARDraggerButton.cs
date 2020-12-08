@@ -19,7 +19,7 @@ public class ARDraggerButton : MonoBehaviour,
     public UnityEvent onVerticalDragExit;
 
     public GameObject draggablePrefab;
-    IARDraggableObject[] draggables;
+    IARDraggable[] draggables;
 
     public float pointerHoldTime = 1f;
 
@@ -129,21 +129,34 @@ public class ARDraggerButton : MonoBehaviour,
                 button.onClick.Invoke();
                 button.OnPointerExit(currentEventData);
 
-                GameObject draggableInstance = GameObject.Instantiate(draggablePrefab);
-                draggables = draggableInstance.GetComponents<IARDraggableObject>();
-                foreach(IARDraggableObject draggable in draggables)
+                // get spawn position
+                IARDraggableSpawnable spawnable = draggablePrefab.GetComponent<IARDraggableSpawnable>();
+                Vector3 spawnPosition = Vector3.zero;
+                if (spawnable != null)
+                    spawnPosition = spawnable.GetSpawnPosition(screenPos);
+
+                // spawn
+                GameObject draggableInstance = GameObject.Instantiate(draggablePrefab, spawnPosition, Quaternion.identity);
+
+                // send drag begin event
+                draggables = draggableInstance.GetComponents<IARDraggable>();
+                foreach(IARDraggable draggable in draggables)
                     draggable.OnDragBegin(screenPos);
             };
             draggingState.draggingVerticaly.OnUpdate = delegate
             {
-                foreach(IARDraggableObject draggable in draggables)
+                foreach(IARDraggable draggable in draggables)
                     draggable.OnDragUpdate(screenPos);
+            };
+            draggingState.draggingVerticaly.OnFixedUpdate = delegate
+            {
+                
             };
             draggingState.draggingVerticaly.OnExit = delegate
             {
                 if (onVerticalDragExit != null)
                     onVerticalDragExit.Invoke();
-                foreach(IARDraggableObject draggable in draggables)
+                foreach(IARDraggable draggable in draggables)
                     draggable.OnDragEnd(screenPos);
             };
 
