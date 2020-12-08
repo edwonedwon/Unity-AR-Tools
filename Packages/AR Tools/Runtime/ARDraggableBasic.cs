@@ -19,7 +19,13 @@ public class ARDraggableBasic : MonoBehaviour, IARDraggable, IARDraggableSpawnab
     public Vector2 screenPos {get;set;}
     GameObject player;
     Camera playerCamera;
-    public LayerMask raycastLayerMask;
+    public enum PlacementType { Touch, Raycast }
+    public PlacementType placementType;
+    [Header("Touch")]
+    public float distanceFromCamera = 1f; // only relevent if set to Touch placement type
+    [Header("Raycast")]
+    public LayerMask placementRaycastLayerMask; // only relevent if set to Raycast placement type
+    [Header("Debug")]
     public bool debugDraw;
 
     void Awake()
@@ -39,16 +45,24 @@ public class ARDraggableBasic : MonoBehaviour, IARDraggable, IARDraggableSpawnab
         Ray ray = playerCamera.ScreenPointToRay(screenPos);
         if (debugDraw)
             Debug.DrawRay(ray.origin, ray.direction, Color.red, .001f);
-        if (Physics.Raycast(ray, out RaycastHit hit, 10000000, raycastLayerMask))
-        {
-            if (debugDraw)
-                Debug.DrawRay(hit.point, Vector3.up, Color.green, .001f);
-            transform.position = hit.point;
-        }
 
-        // update position
-        transform.up = Vector3.up;
-        transform.forward = Vector3.ProjectOnPlane(playerCamera.transform.position - hit.point, Vector3.up);
+        if (placementType == PlacementType.Touch)
+        {
+            Vector3 position = playerCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, distanceFromCamera));
+            transform.position = position;
+        }
+        else if (placementType == PlacementType.Raycast)
+        {
+            if (Physics.Raycast(ray, out RaycastHit hit, 10000000, placementRaycastLayerMask))
+            {
+                if (debugDraw)
+                    Debug.DrawRay(hit.point, Vector3.up, Color.green, .001f);
+                transform.position = hit.point;
+            }
+            // update position
+            transform.up = Vector3.up;
+            transform.forward = Vector3.ProjectOnPlane(playerCamera.transform.position - hit.point, Vector3.up);
+        }
     }
 
     public void OnDragEnd(Vector2 screenPos)
