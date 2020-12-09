@@ -36,6 +36,9 @@ public class ARDraggableThrowable : MonoBehaviour, IARDraggable, IARDraggableSpa
 
     public void OnDragBegin(Vector2 screenPos)
     {   
+        if (mainRigidbody == null)
+            return;
+
         mainRigidbody.isKinematic = true;
         screenPosLast = Vector2.zero;
         if (randomRotation)
@@ -48,6 +51,9 @@ public class ARDraggableThrowable : MonoBehaviour, IARDraggable, IARDraggableSpa
 
     public void OnDragUpdate(Vector2 screenPos)
     {
+        if (mainRigidbody == null)
+            return;
+        
         mainRigidbody.MovePosition(GetSpawnPosition(screenPos));
 
         screenVelocity = screenPos - screenPosLast;
@@ -60,6 +66,9 @@ public class ARDraggableThrowable : MonoBehaviour, IARDraggable, IARDraggableSpa
 
     public void OnDragEnd(Vector2 screenPos)
     {
+        if (mainRigidbody == null)
+            return;
+            
         mainRigidbody.isKinematic = false;
         Vector3 throwForceVector = new Vector3(
             Mathf.Clamp(screenVelocitySmoothed.x, -throwForceClamp, throwForceClamp), 
