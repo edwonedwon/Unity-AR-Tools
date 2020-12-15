@@ -22,9 +22,14 @@
   },
   "samples": [
     {
-      "displayName": "Sample",
-      "description": "all the samples",
-      "path": "Samples"
+      "displayName": "Draggable Sample",
+      "description": " ",
+      "path": "Samples/Draggable Sample"
+    },
+    {
+      "displayName": "Holder Sample",
+      "description": " ",
+      "path": "Samples/Holder Sample"
     }
   ]
 }
