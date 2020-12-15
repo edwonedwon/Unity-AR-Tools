@@ -4,47 +4,50 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.ARFoundation;
 
-public class ARMeshSupportedEvents : MonoBehaviour
+namespace Edwon.ARTools
 {
-    public bool debugLog;
-    public UnityEvent meshSupportedDeviceAwake;
-    public UnityEvent meshUnsupportedDeviceAwake;
-    ARMeshManager arMeshManager;
-    bool arSessionReady;
-
-    void Awake()
+    public class ARMeshSupportedEvents : MonoBehaviour
     {
-        arSessionReady = false;
+        public bool debugLog;
+        public UnityEvent meshSupportedDeviceAwake;
+        public UnityEvent meshUnsupportedDeviceAwake;
+        ARMeshManager arMeshManager;
+        bool arSessionReady;
 
-        arMeshManager = FindObjectOfType<ARMeshManager>();
-
-        if (arMeshManager != null)
-            StartCoroutine(Init());
-        else
-            Debug.Log("ARMeshManager is null on ARMeshSupportedEvents");
-    }
-
-    IEnumerator Init()
-    {
-        while(!arSessionReady)
+        void Awake()
         {
-            if (ARSession.state == ARSessionState.Ready)
+            arSessionReady = false;
+
+            arMeshManager = FindObjectOfType<ARMeshManager>();
+
+            if (arMeshManager != null)
+                StartCoroutine(Init());
+            else
+                Debug.Log("ARMeshManager is null on ARMeshSupportedEvents");
+        }
+
+        IEnumerator Init()
+        {
+            while(!arSessionReady)
             {
-                arSessionReady = true;
-                if (arMeshManager.subsystem != null)
+                if (ARSession.state == ARSessionState.Ready)
                 {
-                    if (debugLog)
-                        Debug.Log("invoking mesh Supported DeviceAwake()");
-                    meshSupportedDeviceAwake.Invoke();
+                    arSessionReady = true;
+                    if (arMeshManager.subsystem != null)
+                    {
+                        if (debugLog)
+                            Debug.Log("invoking mesh Supported DeviceAwake()");
+                        meshSupportedDeviceAwake.Invoke();
+                    }
+                    else
+                    {
+                        if (debugLog)
+                            Debug.Log("invoking mesh Unsupported DeviceAwake()");
+                        meshUnsupportedDeviceAwake.Invoke();
+                    }
                 }
-                else
-                {
-                    if (debugLog)
-                        Debug.Log("invoking mesh Unsupported DeviceAwake()");
-                    meshUnsupportedDeviceAwake.Invoke();
-                }
+                yield return null;
             }
-            yield return null;
         }
     }
 }

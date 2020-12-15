@@ -2,66 +2,69 @@
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
-public class ARPlaneVisualControl : MonoBehaviour
+namespace Edwon.ARTools
 {
-    ARPlaneManager arPlaneManager;
-    public Material textureMaterial;
-    Material textureMaterialShared;
-    public string textureColorParameter;
-    public string planeColorParameter;
-    Color textureColorStart;
-    Color planeColorStart;
-
-    void Awake()
+    public class ARPlaneVisualControl : MonoBehaviour
     {
-        if (Application.isPlaying && !Application.isEditor)
+        ARPlaneManager arPlaneManager;
+        public Material textureMaterial;
+        Material textureMaterialShared;
+        public string textureColorParameter;
+        public string planeColorParameter;
+        Color textureColorStart;
+        Color planeColorStart;
+
+        void Awake()
         {
-            arPlaneManager = FindObjectOfType<ARPlaneManager>();
-            Material[] sharedMaterials = arPlaneManager.planePrefab.GetComponent<Renderer>().sharedMaterials;
-            foreach(Material m in sharedMaterials)
+            if (Application.isPlaying && !Application.isEditor)
             {
-                if (m.name == textureMaterial.name)
+                arPlaneManager = FindObjectOfType<ARPlaneManager>();
+                Material[] sharedMaterials = arPlaneManager.planePrefab.GetComponent<Renderer>().sharedMaterials;
+                foreach(Material m in sharedMaterials)
                 {
-                    textureMaterialShared = m;
-                    break;
+                    if (m.name == textureMaterial.name)
+                    {
+                        textureMaterialShared = m;
+                        break;
+                    }
                 }
             }
+            else
+            {
+                textureMaterialShared = textureMaterial;
+            }
+            
+            textureColorStart = textureMaterialShared.GetColor(textureColorParameter);
+            planeColorStart = textureMaterialShared.GetColor(planeColorParameter);
         }
-        else
+
+        [InspectorButton("ShowPlaneTexture")]
+        public bool showPlaneTexture;
+        public void ShowPlaneTexture()
         {
-            textureMaterialShared = textureMaterial;
+            textureMaterialShared.SetColor(textureColorParameter, textureColorStart);
+            textureMaterialShared.SetColor(planeColorParameter, planeColorStart);
         }
-        
-        textureColorStart = textureMaterialShared.GetColor(textureColorParameter);
-        planeColorStart = textureMaterialShared.GetColor(planeColorParameter);
-    }
 
-    [InspectorButton("ShowPlaneTexture")]
-    public bool showPlaneTexture;
-    public void ShowPlaneTexture()
-    {
-        textureMaterialShared.SetColor(textureColorParameter, textureColorStart);
-        textureMaterialShared.SetColor(planeColorParameter, planeColorStart);
-    }
-
-    [InspectorButton("HidePlaneTexture")]
-    public bool hidePlaneTexture;
-    public void HidePlaneTexture()
-    {
-        float alpha = 0;
-        Color textureColor = new Color(
-            textureColorStart.r,
-            textureColorStart.g,
-            textureColorStart.b,
-            alpha
-        );
-        Color planeColor = new Color(
-            planeColorStart.r,
-            planeColorStart.g,
-            planeColorStart.b,
-            alpha
-        );
-        textureMaterialShared.SetColor(textureColorParameter, textureColor);
-        textureMaterialShared.SetColor(planeColorParameter, textureColor);
+        [InspectorButton("HidePlaneTexture")]
+        public bool hidePlaneTexture;
+        public void HidePlaneTexture()
+        {
+            float alpha = 0;
+            Color textureColor = new Color(
+                textureColorStart.r,
+                textureColorStart.g,
+                textureColorStart.b,
+                alpha
+            );
+            Color planeColor = new Color(
+                planeColorStart.r,
+                planeColorStart.g,
+                planeColorStart.b,
+                alpha
+            );
+            textureMaterialShared.SetColor(textureColorParameter, textureColor);
+            textureMaterialShared.SetColor(planeColorParameter, textureColor);
+        }
     }
 }

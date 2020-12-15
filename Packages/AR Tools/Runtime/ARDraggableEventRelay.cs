@@ -3,38 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ARDraggableEventRelay : MonoBehaviour
+namespace Edwon.ARTools
 {
-    public UnityEvent onDragBegin;
-    public UnityEvent onDragUpdate;
-    public UnityEvent onDragEnd;
-
-    public void OnDragBegin(GameObject dragged, Vector2 screenPos)
+    public class ARDraggableEventRelay : MonoBehaviour
     {
-        onDragBegin.Invoke();
-    }
+        public UnityEvent onDragBegin;
+        public UnityEvent onDragUpdate;
+        public UnityEvent onDragEnd;
 
-    public void OnDragUpdate(GameObject dragged, Vector2 screenPos)
-    {
-        onDragUpdate.Invoke();
-    }
+        public void OnDragBegin(GameObject dragged, Vector2 screenPos)
+        {
+            onDragBegin.Invoke();
+        }
 
-    public void OnDragEnd(GameObject dragged, Vector2 screenPos)
-    {
-        onDragEnd.Invoke();
-    }
+        public void OnDragUpdate(GameObject dragged, Vector2 screenPos)
+        {
+            onDragUpdate.Invoke();
+        }
 
-    void OnEnable()
-    {
-        ARDraggableEventBroadcaster.onDragBeginEvent += OnDragBegin;
-        ARDraggableEventBroadcaster.onDragUpdateEvent += OnDragUpdate;
-        ARDraggableEventBroadcaster.onDragEndEvent += OnDragEnd;
-    }
+        public void OnDragEnd(GameObject dragged, Vector2 screenPos)
+        {
+            onDragEnd.Invoke();
+        }
 
-    void OnDisable()
-    {
-        ARDraggableEventBroadcaster.onDragBeginEvent -= OnDragBegin;
-        ARDraggableEventBroadcaster.onDragUpdateEvent -= OnDragUpdate;
-        ARDraggableEventBroadcaster.onDragEndEvent -= OnDragEnd;
+        void OnEnable()
+        {
+            ARDraggableEventBroadcaster.onDragBeginEvent += OnDragBegin;
+            ARDraggableEventBroadcaster.onDragUpdateEvent += OnDragUpdate;
+            ARDraggableEventBroadcaster.onDragEndEvent += OnDragEnd;
+        }
+
+        void OnDisable()
+        {
+            ARDraggableEventBroadcaster.onDragBeginEvent -= OnDragBegin;
+            ARDraggableEventBroadcaster.onDragUpdateEvent -= OnDragUpdate;
+            ARDraggableEventBroadcaster.onDragEndEvent -= OnDragEnd;
+        }
     }
 }

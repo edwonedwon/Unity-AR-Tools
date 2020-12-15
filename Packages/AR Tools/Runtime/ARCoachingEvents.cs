@@ -7,62 +7,65 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARKit;
 #endif
 
-public class ARCoachingEvents : MonoBehaviour
+namespace Edwon.ARTools
 {
-    public bool debugLog;
-
-    public UnityEvent onARCoachingBegin;
-    public UnityEvent onARCoachingEnd;
-
-    ARSession arSession;
-    // [ReadOnly]
-    [SerializeField]
-    bool arCoachingActive;
-    bool arCoachingActiveLast;
-    #if UNITY_IOS && !UNITY_EDITOR
-    ARKitSessionSubsystem arKitSessionSubsystem;
-    #endif
-
-    void Awake()
+    public class ARCoachingEvents : MonoBehaviour
     {
-        arSession = FindObjectOfType<ARSession>();
+        public bool debugLog;
 
+        public UnityEvent onARCoachingBegin;
+        public UnityEvent onARCoachingEnd;
+
+        ARSession arSession;
+        // [ReadOnly]
+        [SerializeField]
+        bool arCoachingActive;
+        bool arCoachingActiveLast;
         #if UNITY_IOS && !UNITY_EDITOR
-        if (arSession.subsystem is ARKitSessionSubsystem)
-            arKitSessionSubsystem = arSession.subsystem as ARKitSessionSubsystem;
-        #endif
-    }
-
-    void OnARCoachingBegin()
-    {
-        if (debugLog)
-            Debug.Log("invoking: onARCoachingBegin");
-
-        onARCoachingBegin.Invoke();
-    }
-
-    void OnARCoachingEnd()
-    {
-        if (debugLog)
-            Debug.Log("invoking: onARCoachingEnd");
-
-        onARCoachingEnd.Invoke();
-    }
-
-    void Update()
-    {
-        #if UNITY_IOS && !UNITY_EDITOR
-        arCoachingActive = arKitSessionSubsystem.coachingActive;
+        ARKitSessionSubsystem arKitSessionSubsystem;
         #endif
 
-        if (arCoachingActive != arCoachingActiveLast)
+        void Awake()
         {
-            if (arCoachingActive)
-                OnARCoachingBegin();
-            else
-                OnARCoachingEnd();
+            arSession = FindObjectOfType<ARSession>();
+
+            #if UNITY_IOS && !UNITY_EDITOR
+            if (arSession.subsystem is ARKitSessionSubsystem)
+                arKitSessionSubsystem = arSession.subsystem as ARKitSessionSubsystem;
+            #endif
         }
 
-        arCoachingActiveLast = arCoachingActive;
+        void OnARCoachingBegin()
+        {
+            if (debugLog)
+                Debug.Log("invoking: onARCoachingBegin");
+
+            onARCoachingBegin.Invoke();
+        }
+
+        void OnARCoachingEnd()
+        {
+            if (debugLog)
+                Debug.Log("invoking: onARCoachingEnd");
+
+            onARCoachingEnd.Invoke();
+        }
+
+        void Update()
+        {
+            #if UNITY_IOS && !UNITY_EDITOR
+            arCoachingActive = arKitSessionSubsystem.coachingActive;
+            #endif
+
+            if (arCoachingActive != arCoachingActiveLast)
+            {
+                if (arCoachingActive)
+                    OnARCoachingBegin();
+                else
+                    OnARCoachingEnd();
+            }
+
+            arCoachingActiveLast = arCoachingActive;
+        }
     }
 }
