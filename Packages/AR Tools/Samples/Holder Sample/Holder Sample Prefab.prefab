@@ -15,10 +15,12 @@ GameObject:
   - component: {fileID: -3762220576658024289}
   - component: {fileID: 1364714301175770167}
   - component: {fileID: 8138841454695935403}
-  - component: {fileID: -6957908530278112554}
+  - component: {fileID: 1710806688674650477}
   - component: {fileID: 4039398152137583164}
+  - component: {fileID: -4818258131741768773}
+  - component: {fileID: 3689683643205587088}
   m_Layer: 0
-  m_Name: AR Draggable Holdable
+  m_Name: Holder Sample Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,7 +150,7 @@ MonoBehaviour:
   debugLog: 0
   invokeOnlyIfStartedOverGui: 0
   invokeOnlyIfWholeLifecycle: 1
---- !u!114 &-6957908530278112554
+--- !u!114 &1710806688674650477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,14 +159,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3682682418435731019}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d602ba9ebb3d4b8e8ac4ecb3474df81, type: 3}
+  m_Script: {fileID: 11500000, guid: 65d7b3d8b65504175b5453513a70b246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementType: 0
+  mainRigidbody: {fileID: -3762220576658024289}
   distanceFromCamera: 1
-  placementRaycastLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
+  throwForce: 0.1
+  throwForceMin: 3
+  throwForceClamp: 30
+  screenVelocityLerp: 0.9
+  randomRotation: 1
   debugDraw: 0
 --- !u!114 &4039398152137583164
 MonoBehaviour:
@@ -202,6 +206,30 @@ MonoBehaviour:
   onTouchEnd:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: -4818258131741768773}
+        m_TargetAssemblyTypeName: Edwon.Tools.SpawnEventSender, edwon.tools.runtime
+        m_MethodName: SendSpawnAndHoldDuplicateEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4039398152137583164}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 8138841454695935403}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
@@ -214,3 +242,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-4818258131741768773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3682682418435731019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49fc9dbd05cc4788896904633cdca9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToSpawn: {fileID: 3682682418435731019}
+  spawnerName: Player Spawner
+  sendSpawnEvent: 0
+  sendSpawnAndHoldEvent: 0
+  sendSpawnAndHoldDuplicateEvent: 0
+--- !u!114 &3689683643205587088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3682682418435731019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d06b4350ca86948ad865cb01b19426f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3682682418435731019}
+  getPrefabReference: 0

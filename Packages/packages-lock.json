@@ -8,17 +8,17 @@
         "com.unity.xr.arkit": "4.1.1",
         "com.unity.xr.arfoundation": "4.1.1",
         "com.thatcosmonaut.stately": "1.0.3",
-        "com.edwon.tools": "1.1.0",
+        "com.edwon.tools": "1.1.2",
         "com.edwon.mobiletools": "1.0.0",
         "com.edwon.physicsrigtools": "1.0.4"
       }
     },
     "com.edwon.mobiletools": {
-      "version": "https://github.com/edwonia/Unity-Mobile-Tools.git?path=/Packages/Mobile Tools#1.0.0",
+      "version": "https://github.com/edwonia/Unity-Mobile-Tools.git?path=/Packages/Mobile Tools#1.0.2",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "9f989adaaa7a0d50b11d554d55601afe4ea78a4f"
+      "hash": "c363e8ec22177af1c8e16b98e8e8255794c749cc"
     },
     "com.edwon.physicsrigtools": {
       "version": "https://bfb37c8e79cba07c580165a675aa3e3c4a7afaa5@github.com/edwonia/Unity-Physics-Rig-Tools.git?path=/Packages/Physics Rig Tools#1.0.4",
@@ -30,13 +30,13 @@
       "hash": "822f6bb6bc7f7cb6dc5fe0e21c0de127520f8677"
     },
     "com.edwon.tools": {
-      "version": "https://github.com/edwonia/Unity-Tools.git?path=/Packages/Unity Tools#1.1.0",
+      "version": "https://github.com/edwonia/Unity-Tools.git?path=/Packages/Unity Tools#1.1.4",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.ugui": "1.0.0"
       },
-      "hash": "8f355efe6258e5c76f9674a7d17c320138abf722"
+      "hash": "5415d5645df426fe985a0892ea7aa658c76ad05c"
     },
     "com.thatcosmonaut.stately": {
       "version": "https://gitlab.com/Edwon/stately.git?path=/UnityPackage/Packages/Stately#1.0.3",
