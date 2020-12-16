@@ -20,8 +20,7 @@ namespace Edwon.ARTools
     public class ARDraggableBasic : MonoBehaviour, IARDraggable, IARDraggableSpawnable
     {
         public Vector2 screenPos {get;set;}
-        GameObject player;
-        Camera playerCamera;
+        new Camera camera;
         public enum PlacementType { Touch, Raycast }
         public PlacementType placementType;
         [Header("Touch")]
@@ -33,25 +32,24 @@ namespace Edwon.ARTools
 
         void Awake()
         {
-            player = GameObject.FindWithTag("Player");
-            playerCamera = player.GetComponentInChildren<Camera>();
+            camera = Camera.main;
         }
 
         public void OnDragBegin(Vector2 screenPos)
         {
-            transform.LookAt(playerCamera.transform);
+            transform.LookAt(camera.transform);
         }
 
         public void OnDragUpdate(Vector2 screenPos)
         {
             // update rotation
-            Ray ray = playerCamera.ScreenPointToRay(screenPos);
+            Ray ray = camera.ScreenPointToRay(screenPos);
             if (debugDraw)
                 Debug.DrawRay(ray.origin, ray.direction, Color.red, .001f);
 
             if (placementType == PlacementType.Touch)
             {
-                Vector3 position = playerCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, distanceFromCamera));
+                Vector3 position = camera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, distanceFromCamera));
                 transform.position = position;
             }
             else if (placementType == PlacementType.Raycast)
@@ -64,7 +62,7 @@ namespace Edwon.ARTools
                 }
                 // update position
                 transform.up = Vector3.up;
-                transform.forward = Vector3.ProjectOnPlane(playerCamera.transform.position - hit.point, Vector3.up);
+                transform.forward = Vector3.ProjectOnPlane(camera.transform.position - hit.point, Vector3.up);
             }
         }
 
