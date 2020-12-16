@@ -7,8 +7,7 @@ namespace Edwon.ARTools
     public class ARDraggableThrowable : MonoBehaviour, IARDraggable, IARDraggableSpawnable
     {
         // public Vector2 screenPos {get;set;}
-        GameObject player;
-        Camera playerCamera;
+        new Camera camera;
         Transform throwVectorTF;
         public Rigidbody mainRigidbody;
         public float distanceFromCamera = 1f;
@@ -25,15 +24,14 @@ namespace Edwon.ARTools
         void Awake()
         {
             GetPlayerComponents();
-            throwVectorTF = playerCamera.transform.Find("Throw Vector");
+            throwVectorTF = camera.transform.Find("Throw Vector");
             if (mainRigidbody == null)
                 mainRigidbody = GetComponent<Rigidbody>();
         }
 
         void GetPlayerComponents()
         {
-            player = GameObject.FindWithTag("Player");
-            playerCamera = player.GetComponentInChildren<Camera>();
+            camera = Camera.main;
         }
 
         public void OnDragBegin(Vector2 screenPos)
@@ -46,7 +44,7 @@ namespace Edwon.ARTools
             if (randomRotation)
                 mainRigidbody.MoveRotation(Random.rotation);
             else
-                mainRigidbody.MoveRotation(playerCamera.transform.rotation);
+                mainRigidbody.MoveRotation(camera.transform.rotation);
             
             mainRigidbody.MovePosition(GetSpawnPosition(screenPos));
         }
@@ -80,16 +78,16 @@ namespace Edwon.ARTools
             throwForceVector *= throwForce;
             throwForceVector = Vector3.ClampMagnitude(throwForceVector, throwForceClamp);
             if (debugDraw)
-                Debug.DrawRay(playerCamera.transform.position, throwForceVector, Color.red, 1f);
+                Debug.DrawRay(camera.transform.position, throwForceVector, Color.red, 1f);
             mainRigidbody.AddForce(throwForceVector);
         }
 
         public Vector3 GetSpawnPosition(Vector2 screenPos)
         {
-            if (player == null || playerCamera == null)
+            if (camera == null)
                 GetPlayerComponents();
 
-            return playerCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, distanceFromCamera));
+            return camera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, distanceFromCamera));
         }
     }
 }

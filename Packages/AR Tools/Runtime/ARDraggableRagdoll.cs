@@ -14,8 +14,7 @@ namespace Edwon.ARTools
         [SerializeField]
         bool draggingEnabled;
         public LayerMask raycastLayerMask;
-        GameObject player;
-        Camera playerCamera;
+        new Camera camera;
         public Rigidbody rigidbodyToDrag;
         public Transform feetPosition;
         [ReadOnly]
@@ -36,9 +35,8 @@ namespace Edwon.ARTools
         void Awake()
         {
             draggingEnabled = true;
-            player = GameObject.FindWithTag("Player");
             rigScaler = GetComponent<RigScaler>();
-            playerCamera = player.GetComponentInChildren<Camera>();
+            camera = Camera.main;
             resetableRigidbodies = transform.GetComponentsInChildren<ResetableRigidbody>();
             rigidbodies = transform.GetComponentsInChildren<Rigidbody>().ToList();
             distanceToFeet = Vector3.Distance(rigidbodyToDrag.transform.position, feetPosition.position);
@@ -73,7 +71,7 @@ namespace Edwon.ARTools
                 Debug.Log(gameObject.name + " OnDragUpdate");
 
             // RAYCAST
-            Ray ray = playerCamera.ScreenPointToRay(screenPos);
+            Ray ray = camera.ScreenPointToRay(screenPos);
 
             if (debugDraw)
                 Debug.DrawRay(ray.origin, ray.direction, Color.red, .001f);
@@ -91,7 +89,7 @@ namespace Edwon.ARTools
             }
             
             // UPDATE ROTATION
-            Vector3 forward = Vector3.ProjectOnPlane(playerCamera.transform.position - hit.point, Vector3.up);
+            Vector3 forward = Vector3.ProjectOnPlane(camera.transform.position - hit.point, Vector3.up);
             targetRotation = Quaternion.LookRotation(forward, Vector3.up);
 
             if (!rigScaler.tweening)

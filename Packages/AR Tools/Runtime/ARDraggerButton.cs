@@ -56,13 +56,11 @@ namespace Edwon.ARTools
         const string onPointerExitSignal = "onPointerExit";
         const string onDragSignal = "onDragSignal";
 
-        GameObject player;
-        Camera playerCamera;
+        new Camera camera;
 
         void Awake()
         {
-            player = GameObject.FindWithTag("Player");
-            playerCamera = player.GetComponentInChildren<Camera>();
+            camera = Camera.main;
 
             button = GetComponent<Button>();
             scrollRect = GetComponentInParent<ScrollRect>();
