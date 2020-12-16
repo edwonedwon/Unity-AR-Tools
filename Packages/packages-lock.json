@@ -8,8 +8,8 @@
         "com.unity.xr.arkit": "4.1.1",
         "com.unity.xr.arfoundation": "4.1.1",
         "com.thatcosmonaut.stately": "1.0.3",
-        "com.edwon.tools": "1.1.2",
-        "com.edwon.mobiletools": "1.0.0",
+        "com.edwon.tools": "1.1.4",
+        "com.edwon.mobiletools": "1.0.2",
         "com.edwon.physicsrigtools": "1.0.4"
       }
     },
