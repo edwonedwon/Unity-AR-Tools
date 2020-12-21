@@ -17,6 +17,8 @@ namespace Edwon.ARTools
     {
         Vector3 GetSpawnPosition(Vector2 screenPos);
     }
+    
+    public enum PlacementType { Touch, Raycast }
 
     public class ARDraggableBasic : MonoBehaviour, IARDraggable, IARDraggableSpawnable
     {
@@ -24,7 +26,6 @@ namespace Edwon.ARTools
         public bool IsDragged {get{ return isDragged;}}
         public Vector2 screenPos {get;set;}
         new Camera camera;
-        public enum PlacementType { Touch, Raycast }
         public PlacementType placementType;
         [Header("Touch")]
         public float distanceFromCamera = 1f; // only relevent if set to Touch placement type
