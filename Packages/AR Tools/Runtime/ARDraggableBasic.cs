@@ -7,6 +7,7 @@ namespace Edwon.ARTools
 {
     public interface IARDraggable
     {
+        bool IsDragged {get;}
         void OnDragBegin(Vector2 screenPos);
         void OnDragUpdate(Vector2 screenPos);
         void OnDragEnd(Vector2 screenPos);
@@ -19,6 +20,8 @@ namespace Edwon.ARTools
 
     public class ARDraggableBasic : MonoBehaviour, IARDraggable, IARDraggableSpawnable
     {
+        bool isDragged;
+        public bool IsDragged {get{ return isDragged;}}
         public Vector2 screenPos {get;set;}
         new Camera camera;
         public enum PlacementType { Touch, Raycast }
@@ -37,6 +40,7 @@ namespace Edwon.ARTools
 
         public void OnDragBegin(Vector2 screenPos)
         {
+            isDragged = true;
             transform.LookAt(camera.transform);
         }
 
@@ -68,7 +72,7 @@ namespace Edwon.ARTools
 
         public void OnDragEnd(Vector2 screenPos)
         {
-
+            isDragged = false;
         }
 
         public Vector3 GetSpawnPosition(Vector2 screenPos)

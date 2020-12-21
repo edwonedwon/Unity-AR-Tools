@@ -6,6 +6,9 @@ namespace Edwon.ARTools
 {
     public class ARDraggableThrowable : MonoBehaviour, IARDraggable, IARDraggableSpawnable
     {
+        bool isDragged;
+        public bool IsDragged {get{ return isDragged;}}
+
         // public Vector2 screenPos {get;set;}
         new Camera camera;
         Transform throwVectorTF;
@@ -39,6 +42,8 @@ namespace Edwon.ARTools
             if (mainRigidbody == null)
                 return;
 
+            isDragged = true;
+
             mainRigidbody.isKinematic = true;
             screenPosLast = Vector2.zero;
             if (randomRotation)
@@ -68,6 +73,8 @@ namespace Edwon.ARTools
         {
             if (mainRigidbody == null)
                 return;
+
+            isDragged = false;
                 
             mainRigidbody.isKinematic = false;
             Vector3 throwForceVector = new Vector3(
