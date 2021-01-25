@@ -11,11 +11,12 @@ namespace Edwon.ARTools
         public bool debugLog;
         public UnityEvent meshSupportedDeviceAwake;
         public UnityEvent meshUnsupportedDeviceAwake;
-        ARMeshManager arMeshManager;
+        UnityEngine.XR.ARFoundation.ARMeshManager arMeshManager;
         bool arSessionReady;
 
         void Awake()
         {
+            Debug.Log("ARMeshSupportedEvents this script currently broken due to issues with AR Foundation Remote");
             arSessionReady = false;
 
             arMeshManager = FindObjectOfType<ARMeshManager>();
@@ -33,18 +34,18 @@ namespace Edwon.ARTools
                 if (ARSession.state == ARSessionState.Ready)
                 {
                     arSessionReady = true;
-                    if (arMeshManager.subsystem != null)
-                    {
-                        if (debugLog)
-                            Debug.Log("invoking mesh Supported DeviceAwake()");
-                        meshSupportedDeviceAwake.Invoke();
-                    }
-                    else
-                    {
-                        if (debugLog)
-                            Debug.Log("invoking mesh Unsupported DeviceAwake()");
-                        meshUnsupportedDeviceAwake.Invoke();
-                    }
+                    // if (arMeshManager.subsystem != null)
+                    // {
+                    //     if (debugLog)
+                    //         Debug.Log("invoking mesh Supported DeviceAwake()");
+                    //     meshSupportedDeviceAwake.Invoke();
+                    // }
+                    // else
+                    // {
+                    //     if (debugLog)
+                    //         Debug.Log("invoking mesh Unsupported DeviceAwake()");
+                    //     meshUnsupportedDeviceAwake.Invoke();
+                    // }
                 }
                 yield return null;
             }
