@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using Stately;
 using System;
+using Edwon.Tools;
 
 namespace Edwon.ARTools
 {
@@ -21,7 +22,7 @@ namespace Edwon.ARTools
         public UnityEvent onVerticalDragExit;
 
         public GameObject draggablePrefab;
-        IARDraggable[] draggables;
+        IDraggable[] draggables;
 
         public float pointerHoldTime = 1f;
 
@@ -139,13 +140,13 @@ namespace Edwon.ARTools
                     GameObject draggableInstance = GameObject.Instantiate(draggablePrefab, spawnPosition, Quaternion.identity);
 
                     // send drag begin event
-                    draggables = draggableInstance.GetComponents<IARDraggable>();
-                    foreach(IARDraggable draggable in draggables)
+                    draggables = draggableInstance.GetComponents<IDraggable>();
+                    foreach(IDraggable draggable in draggables)
                         draggable.OnDragBegin(screenPos);
                 };
                 draggingState.draggingVerticaly.OnUpdate = delegate
                 {
-                    foreach(IARDraggable draggable in draggables)
+                    foreach(IDraggable draggable in draggables)
                         draggable.OnDragUpdate(screenPos);
                 };
                 draggingState.draggingVerticaly.OnFixedUpdate = delegate
@@ -156,7 +157,7 @@ namespace Edwon.ARTools
                 {
                     if (onVerticalDragExit != null)
                         onVerticalDragExit.Invoke();
-                    foreach(IARDraggable draggable in draggables)
+                    foreach(IDraggable draggable in draggables)
                         draggable.OnDragEnd(screenPos);
                 };
 

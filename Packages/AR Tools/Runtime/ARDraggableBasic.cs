@@ -2,17 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Edwon.MobileTools;
+using Edwon.Tools;
 
 namespace Edwon.ARTools
 {
-    public interface IARDraggable
-    {
-        bool IsDragged {get;}
-        void OnDragBegin(Vector2 screenPos);
-        void OnDragUpdate(Vector2 screenPos);
-        void OnDragEnd(Vector2 screenPos);
-    }
-
     public interface IARDraggableSpawnable
     {
         Vector3 GetSpawnPosition(Vector2 screenPos);
@@ -20,7 +13,7 @@ namespace Edwon.ARTools
     
     public enum PlacementType { Touch, Raycast }
 
-    public class ARDraggableBasic : MonoBehaviour, IARDraggable, IARDraggableSpawnable
+    public class ARDraggableBasic : MonoBehaviour, IDraggable, IARDraggableSpawnable
     {
         bool isDragged;
         public bool IsDragged {get{ return isDragged;}}

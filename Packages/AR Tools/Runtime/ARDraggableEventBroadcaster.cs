@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Edwon.Tools;
 
 namespace Edwon.ARTools
 {
-    public class ARDraggableEventBroadcaster : MonoBehaviour, IARDraggable
+    public class ARDraggableEventBroadcaster : MonoBehaviour, IDraggable
     {
         bool isDragged;
         public bool IsDragged{get {return isDragged;}}

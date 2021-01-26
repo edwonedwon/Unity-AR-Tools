@@ -2,34 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Edwon.MobileTools;
+using Edwon.Tools;
 
 namespace Edwon.ARTools
 {
     public class ARDraggerScreenTouch : ScreenTouchEventReceiverBase
     {
-        IARDraggable[] draggables;
+        IDraggable[] draggables;
 
         void Awake()
         {
-            draggables = GetComponentsInChildren<IARDraggable>();
+            draggables = GetComponentsInChildren<IDraggable>();
         }
 
         public override void OnTouchBegin(Vector2 screenPos)
         {
-            foreach(IARDraggable draggable in draggables)
+            foreach(IDraggable draggable in draggables)
                 draggable.OnDragBegin(screenPos);
 
         }
 
         public override void OnTouchUpdate(Vector2 screenPos)
         {
-            foreach (IARDraggable draggable in draggables)
+            foreach (IDraggable draggable in draggables)
                 draggable.OnDragUpdate(screenPos);
         }
 
         public override void OnTouchEnd(Vector2 screenPos)
         {
-            foreach (IARDraggable draggable in draggables)
+            foreach (IDraggable draggable in draggables)
                 draggable.OnDragEnd(screenPos);
         }
     }
