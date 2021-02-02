@@ -16,7 +16,7 @@ namespace Edwon.ARTools
 
         void Awake()
         {
-            Debug.Log("ARMeshSupportedEvents this script currently broken due to issues with AR Foundation Remote");
+            // Debug.Log("ARMeshSupportedEvents this script currently broken due to issues with AR Foundation Remote");
             arSessionReady = false;
 
             arMeshManager = FindObjectOfType<ARMeshManager>();
