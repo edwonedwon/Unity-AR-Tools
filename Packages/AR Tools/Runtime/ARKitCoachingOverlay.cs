@@ -150,16 +150,16 @@ namespace Edwon.ARTools
         /// <param name="animated">If <c>true</c>, the coaching overlay is animated, e.g. fades out. If <c>false</c>, the coaching overlay disappears instantly, without any transition.</param>
         public void DisableCoaching(bool animated) 
         {
-    #if UNITY_IOS
+    #if UNITY_IOS && !UNITY_EDITOR
             if (supported && GetComponent<ARSession>().subsystem is ARKitSessionSubsystem sessionSubsystem)
             {
                 sessionSubsystem.SetCoachingActive(false, animated ? ARCoachingOverlayTransition.Animated : ARCoachingOverlayTransition.Instant);
             }
             else
-    #endif
             {
                 throw new NotSupportedException("ARCoachingOverlay is not supported");
             }
+    #endif
         }
 
         public void SetGoal(int goalEnumValue)
